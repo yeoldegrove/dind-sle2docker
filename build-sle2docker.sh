@@ -11,4 +11,4 @@ if [ $? -eq 0 ]; then
 else
     echo "$(tput setab 0)$(tput setaf 1)something went wrong"
 fi
-#rm -rf wrapdocker dind Dockerfile
+rm -rf wrapdocker dind Dockerfile
