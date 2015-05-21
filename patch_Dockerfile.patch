@@ -1,0 +1,21 @@
+--- dind/opensuse/Dockerfile	2015-05-21 12:19:28.780733905 +0200
++++ Dockerfile	2015-05-21 12:24:39.633737035 +0200
+@@ -5,6 +5,8 @@
+ RUN zypper --gpg-auto-import-keys --non-interactive refresh && \
+     zypper --gpg-auto-import-keys --non-interactive update && \
+     zypper --gpg-auto-import-keys --non-interactive install --auto-agree-with-licenses docker
++RUN zypper addrepo http://download.opensuse.org/repositories/Virtualization:/containers/openSUSE_13.2/Virtualization:containers.repo && \
++    zypper --gpg-auto-import-keys --non-interactive install --auto-agree-with-licenses sle2docker
+ 
+ # Install the magic wrapper.
+ ADD ./wrapdocker /usr/local/bin/wrapdocker
+@@ -12,5 +14,8 @@
+ 
+ # Define additional metadata for our image.
+ VOLUME /var/lib/docker
+-CMD ["wrapdocker"]
++
++ENTRYPOINT ["/usr/local/bin/wrapdocker"]
++
++CMD ["--help"]
+ 
