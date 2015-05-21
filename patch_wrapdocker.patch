@@ -1,25 +1,23 @@
---- wrapdocker.org	2015-05-21 07:41:44.910828322 +0200
-+++ wrapdocker_sle2docker	2015-05-21 10:03:08.264471459 +0200
-@@ -108,6 +108,19 @@
+--- wrapdocker.org	2015-05-21 13:38:42.644731915 +0200
++++ wrapdocker	2015-05-21 13:44:26.771225135 +0200
+@@ -108,6 +108,20 @@
  		fi
  		sleep 1
  	done
 -	[[ $1 ]] && exec "$@"
 -	exec bash --login
-+	#[[ $1 ]] && exec "$@"
-+	#exec bash --login
-+    if [ "$1" = 'sle2docker' ]; then
++    if [ "$1" = 'sle2docker'  ]; then
 +        $@
 +        test -f /tmp/sle2docker*/result/*.tbz
-+        if [ $? -eq 0 ]; then
-+            #echo "to copy created image out of this container do:"
-+            #echo "docker cp $(hostname):$(ls -1 /tmp/sle2docker*/result/*.tbz) 'wherever you want'"
-+            echo "$(tput setab 7)  $(tput setab 0)$(tput setaf 1)to copy created image out of this container do:$(tput setab 7)  $(tput sgr 0)"
-+            echo "$(tput setab 7)  $(tput setab 0)$(tput setaf 1)# docker cp $(hostname):$(ls -1 /tmp/sle2docker*/result/*.tbz) <wherever you want>$(tput setab 7)  $(tput sgr 0)"
-+            echo "$(tput setab 7)  $(tput setab 0)$(tput setaf 1)$(tput setab 7)  $(tput sgr 0)"
-+            echo "$(tput setab 7)  $(tput setab 0)$(tput setaf 1)to import it into docker do:$(tput setab 7)  $(tput sgr 0)"
-+            echo "$(tput setab 7)  $(tput setab 0)$(tput setaf 1)# docker import - 'imagename' <file.tbz$(tput setab 7)  $(tput sgr 0)"
++        if [ $? -eq 0  ]; then
++            echo "$(tput setaf 1)to copy created image out of this container do:$(tput sgr 0)"
++            echo "$(tput setaf 1)# docker cp $(hostname):$(ls -1 /tmp/sle2docker*/result/*.tbz) 'wherever you want'$(tput sgr 0)"
++            echo ""
++            echo "$(tput setaf 1)to import it into docker do:$(tput sgr 0)"
++            echo "$(tput setaf 1)# docker import - 'imagename' <file.tbz$(tput sgr 0)"
 +            exit 0
++        else
++            exec sle2docker --help
 +        fi
 +    else
 +        exec sle2docker --help
