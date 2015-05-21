@@ -3,7 +3,7 @@ This is a set of patches to build a SLE docker image.
 
 This can be used on any machine running docker. No suse distribution is needed.
 
-This can be accomplished, because we can run dins (docker in docker).
+This can be accomplished, because we can run dind (docker in docker).
 
 It is based on https://github.com/jpetazzo/dind
 
